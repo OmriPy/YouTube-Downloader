@@ -1,6 +1,6 @@
 # YouTube-Downloader
 
-Before I start, I'm sorry for those who are irritated that I didn't use this:
+Before I start, I'm sorry for those who are irritated because I didn't use this:
 ```py
 if __name__ == '__main__':
     main()
