@@ -26,4 +26,4 @@ So if you don't want an icon you can remove that line or if you want an icon typ
 ```py
 root.iconbitmap()
 ```
-And put the path to the icon inside the parentheses.
+And put the full path to the icon inside the parentheses.
