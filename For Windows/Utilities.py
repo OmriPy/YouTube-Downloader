@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import ttk
+from tkinter import Widget, ttk
 
 class Entry(tkinter.Entry):
     def Clear(self):
@@ -23,7 +23,7 @@ class Entry(tkinter.Entry):
         self.InsertText(text)
         self.Disable()
 
-def UnGrid(Widgets: list):
+def UnGrid(Widgets: list[Widget]):
     for widg in Widgets:
         if type(widg) == tkinter.Button or type(widg) == tkinter.Entry or type(widg) == Entry\
             or type(widg) == ttk.Combobox or type(widg) == tkinter.Label:
