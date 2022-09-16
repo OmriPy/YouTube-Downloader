@@ -1,11 +1,12 @@
-import tkinter, time, threading, os, urllib, pathlib
+import tkinter, time, threading, os, urllib, pathlib, sys
 from tkinter import filedialog, ttk
 from pytube import YouTube, exceptions
 import Utilities
 
 root = tkinter.Tk()
 root.title("YouTube Downloader")
-root.iconbitmap(os.path.join(pathlib.Path.cwd(), "icon.ico"))
+# root.iconbitmap(os.path.join(pathlib.Path.cwd(), "icon.ico"))
+root.iconbitmap(sys.argv[0])
 root.resizable(False, False)
 
 
