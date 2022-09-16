@@ -1,12 +1,11 @@
-import tkinter, time, threading, os, urllib, socket, pathlib, sys
+import tkinter, time, threading, os, urllib, pathlib
 from tkinter import filedialog, ttk
 from pytube import YouTube, exceptions
 import Utilities
 
-
 root = tkinter.Tk()
 root.title("YouTube Downloader")
-root.iconbitmap(sys.argv[0])
+root.iconbitmap(os.path.join(pathlib.Path.cwd(), "icon.ico"))
 root.resizable(False, False)
 
 
@@ -16,7 +15,8 @@ def ThreadDownload(link):
     try:
         try:
             video = YouTube(link)
-        except exceptions.RegexMatchError:
+        except exceptions.RegexMatchError as e:
+            print(e)
             LinkEntry.EnableClearInsertDisable("Please enter a valid YouTube link.")
             Utilities.UnGrid([ButtonDownload, ButtonFolder, ChooseType])
             time.sleep(10)
@@ -34,10 +34,10 @@ def ThreadDownload(link):
                 video.streams.get_highest_resolution().download(FolderLocation)
             elif chosen.get() == typeOptions[1]:
                 ShowDownload()
-                des = video.streams.get_audio_only().download(FolderLocation)
-                os.rename(des, des[:len(des) - 3] + "mp3")
+                video.streams.get_audio_only().download(FolderLocation, f"{video.title}.mp3")
             else: return # when no type was chosen 
-        except urllib.error.URLError or socket.gaierror:
+        except urllib.error.URLError as e: # urllib.error.URLError or socket.gaierror:
+            print(e)
             LinkEntry.EnableClearInsertDisable("Internet disconnected!")
             Utilities.UnGrid([ButtonDownload, ButtonFolder, ChooseType])
             ButtonQuit.config(text="Exit")
@@ -55,7 +55,8 @@ def ThreadDownload(link):
         ButtonQuit.grid(row= 4,columnspan=2)
         time.sleep(15)
         Utilities.UnGrid([FinishedLabel])
-    except Exception:
+    except Exception as e:
+        print(e)
         Utilities.UnGrid([ButtonDownload, ButtonFolder, ChooseType])
         LinkEntry.EnableClearInsertDisable("Something went wrong!")
 
@@ -65,7 +66,7 @@ def MainDownload():
 
 def ChooseFolder():
     global FolderLocation
-    root.filename = filedialog.askdirectory(initialdir=f"{pathlib.Path.home()}\\Downloads")
+    root.filename = filedialog.askdirectory(initialdir=os.path.join(pathlib.Path.home(), "Downloads"))
     FolderLocation = root.filename
     if FolderLocation != '':
         for i in range(len(FolderLocation)):
