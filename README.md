@@ -1,3 +1,6 @@
+## NOTE
+The app doesn't work due to the fact that the pytube module isn't supported anymore
+
 # YouTube-Downloader
 
 ## Preparation
