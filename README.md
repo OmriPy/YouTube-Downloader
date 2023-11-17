@@ -1,5 +1,5 @@
 ## NOTE
-The app doesn't work due to the fact that the pytube module isn't supported anymore
+Unfortunately the app doesn't work due to the fact that the `pytube` module isn't supported anymore.
 
 # YouTube-Downloader
 
